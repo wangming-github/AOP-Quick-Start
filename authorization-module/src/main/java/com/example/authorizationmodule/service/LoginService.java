@@ -1,7 +1,7 @@
 package com.example.authorizationmodule.service;
 
 import com.example.authorizationmodule.module.MyUser;
-import com.example.authorizationmodule.module.R;
+import com.example.authorizationmodule.utils.R;
 
 import java.util.Map;
 

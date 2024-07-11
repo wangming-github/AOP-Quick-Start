@@ -1,12 +1,9 @@
-package com.example.authorizationmodule.module;
+package com.example.authorizationmodule.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Data
 @NoArgsConstructor

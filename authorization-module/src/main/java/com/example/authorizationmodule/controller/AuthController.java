@@ -1,13 +1,11 @@
 package com.example.authorizationmodule.controller;
 
 import com.example.authorizationmodule.module.MyUser;
-import com.example.authorizationmodule.module.R;
+import com.example.authorizationmodule.utils.R;
 import com.example.authorizationmodule.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @Slf4j
 @RestController

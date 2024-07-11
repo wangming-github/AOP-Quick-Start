@@ -1,7 +1,7 @@
 package com.example.authorizationmodule.exception;
 
 import com.alibaba.fastjson.JSON;
-import com.example.authorizationmodule.module.R;
+import com.example.authorizationmodule.utils.R;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

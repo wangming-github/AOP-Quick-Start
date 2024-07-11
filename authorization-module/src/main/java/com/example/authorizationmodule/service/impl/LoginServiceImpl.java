@@ -1,8 +1,9 @@
-package com.example.authorizationmodule.service;
+package com.example.authorizationmodule.service.impl;
 
+import com.example.authorizationmodule.service.LoginService;
 import com.example.authorizationmodule.utils.RedisCache;
 import com.example.authorizationmodule.module.MyUser;
-import com.example.authorizationmodule.module.R;
+import com.example.authorizationmodule.utils.R;
 import com.example.authorizationmodule.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

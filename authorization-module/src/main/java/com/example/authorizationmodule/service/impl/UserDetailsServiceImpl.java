@@ -1,4 +1,4 @@
-package com.example.authorizationmodule.service;
+package com.example.authorizationmodule.service.impl;
 
 import com.example.authorizationmodule.module.LoginUser;
 import com.example.authorizationmodule.module.MyUser;
