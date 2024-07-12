@@ -13,7 +13,7 @@
     <modules>
         <module>authorization-module</module>
         <module>log-module</module>
-        <!--        <module>service-module</module>-->
+        <module>service-module</module>
     </modules>
 
     <dependencies>

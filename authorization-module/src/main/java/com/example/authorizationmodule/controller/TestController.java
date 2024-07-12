@@ -22,4 +22,18 @@ public class TestController {
 
         return "Received POST data: " + data;
     }
+
+
+    @PostMapping("/user")
+    public String userExample(@RequestBody String data) {
+
+        return "Received POST data: " + data;
+    }
+
+
+    @PostMapping("/admin")
+    public String adminExample(@RequestBody String data) {
+
+        return "Received POST data: " + data;
+    }
 }

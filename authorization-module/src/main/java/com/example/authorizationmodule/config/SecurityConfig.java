@@ -7,18 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Slf4j
 @Configuration
+@EnableGlobalMethodSecurity(//
+        prePostEnabled = true, // @PreAuthorize 功能: @PreAuthorize注解用于在方法执行之前进行权限验证。它使用SpEL（Spring Expression Language）表达式来定义权限规则，非常灵活。
+        securedEnabled = true)//@Secured 功能: @Secured注解用于在方法级别进行权限控制。它依赖于Spring Security的角色机制，主要用于简单的角色检查。
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -50,20 +51,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 配置一个简单的内存用户
      */
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-        PasswordEncoder passwordEncoder = passwordEncoder();
-
-        String encodedPasswordAdmin = passwordEncoder.encode("admin");
-        String encodedPasswordUser = passwordEncoder.encode("user");
-
-        UserDetails admin = User.withUsername("admin").password(encodedPasswordAdmin).roles("ADMIN").build();
-        UserDetails user = User.withUsername("user").password(encodedPasswordUser).roles("USER").build();
-
-        log.warn("【辅助-mysql】模拟在mysql中添加账户：admin/admin");
-        log.warn("【辅助-mysql】模拟在mysql中添加账户：user/user");
-        return new InMemoryUserDetailsManager(admin, user);
-    }
+    // @Bean
+    // public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+    //     PasswordEncoder passwordEncoder = passwordEncoder();
+    //
+    //     String encodedPasswordAdmin = passwordEncoder.encode("admin");
+    //     String encodedPasswordUser = passwordEncoder.encode("user");
+    //
+    //     UserDetails admin = User.withUsername("admin").password(encodedPasswordAdmin).roles("ADMIN").build();
+    //     UserDetails user = User.withUsername("user").password(encodedPasswordUser).roles("USER").build();
+    //
+    //     log.warn("【辅助-mysql】模拟在mysql中添加账户：admin/admin");
+    //     log.warn("【辅助-mysql】模拟在mysql中添加账户：user/user");
+    //     return new InMemoryUserDetailsManager(admin, user);
+    // }
 
 
     //  public SecurityFilterChain securityFilterChain(HttpSecurity http)

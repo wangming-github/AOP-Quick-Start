@@ -1,13 +1,14 @@
 package com.example.authorizationmodule.config;
 
+import com.example.authorizationmodule.module.CustomUserUserDetails;
 import com.example.authorizationmodule.exception.MyException;
 import com.example.authorizationmodule.utils.JwtUtil;
-import com.example.authorizationmodule.utils.RedisCache;
+import com.example.authorizationmodule.utils.RedisServiceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -45,7 +47,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private RedisCache cache;
+    private RedisServiceUtil cache;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws MyException, ServletException, IOException {
@@ -54,51 +56,33 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         // 获取token
         String token = request.getHeader("Authorization");
         if (!StringUtils.hasText(token)) {
-            log.info("【自定义过滤器-1】请求[没有]携带的token,需要经过后续过滤器校验...");
+            log.info("请求[没有]携带的token,需要经过后续过滤器校验...");
             filterChain.doFilter(request, response);  // 放行
             return;
         }
-        log.info("【自定义过滤器-1】请求携带的token:" + token);
-
-        // 使用 Optional 和 Lambda 表达式处理异常
-        // 如果 jwtUtil.getUsernameFromToken(token) 抛出异常，则将会抛出 ForbiddenException 异常，并带有 "token非法" 的错误信息。
-        // String userName = Optional.ofNullable(jwtUtil.getUsernameFromToken(token)).orElseThrow(() -> new ForbiddenException("token非法"));
         // 解析token
         String userName;
         try {
             userName = jwtUtil.getUsernameFromToken(token);
-            log.info("【自定义过滤器-2】请求携带Token中解析出的用户名:" + userName);
         } catch (Exception e) {
-            log.info("【自定义过滤器-2】[没有]解析出请求中携带Token的用户名!");
-            throw new MyException("token非法");
+            throw new MyException("token解析失败");
         }
 
 
-        // UserDetails userDetails = cache.getUser(userName);
-        // // Optional.ofNullable：将可能为 null 的对象包装为 Optional 对象。
-        // // 如果 userDetails 返回 null，则 userDetailsOpt 将是一个空的 Optional 对象。
-        // Optional<UserDetails> userDetailsOpt = Optional.ofNullable(userDetails);
-        // // orElseThrow：如果 userDetailsOpt 是空的（即 cache.getUser(userName) 返回 null），
-        // // 则通过 Lambda 表达式抛出 ForbiddenException 异常，异常消息为 "用户未登录，登录信息过期!"。
-        // userDetailsOpt.orElseThrow(() -> new ForbiddenException("用户未登录，登录信息过期!"));
-        // 等同于
         // 从redis中获取用户信息
-        UserDetails userDetails = cache.getUser(userName);
-
-        if (Objects.isNull(userDetails)) {
-            log.info("【自定义过滤器-3】[没有]在redis中找到用户名" + userName + "的缓存信息");
+        CustomUserUserDetails user = cache.getUser(userName);
+        if (Objects.isNull(user)) {
+            log.info("[没有]在redis中找到用户名" + userName + "的缓存信息");
             throw new MyException("登录信息过期!");
         }
-        log.info("【自定义过滤器-3】解析出的用户名查询redis中的 UserDetails 缓存信息:" + userDetails.getUsername() + "/" + userDetails.getPassword());
+        log.info("用户名{}的请求携带了token,缓存信息:{}", user.getUsername(), user.getAuthorities());
 
-        // 存入SecurityContextHolder
-        log.info("【自定义过滤器-4】获取UserDetails权限信息封装到第三个参数 Authentication中");
-        // TODO 获取权限信息封装到第三个参数 Authentication中
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
-        // 将登录信息设置到容器中
-        log.info("【自定义过滤器-5】将Authentication登录信息设置到容器中");
+        // 将UserOfLoggedIn封装成Authentication，存放进SecurityContextHolder
+        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 放行
         filterChain.doFilter(request, response);
+        log.info("继续执行后续过滤器。");
     }
 }

@@ -95,7 +95,7 @@ public class JwtUtil {
      * @param username 用户名
      * @return 是否有效
      */
-    public Boolean validateToken(String token, String username) {
+    public Boolean  validateToken(String token, String username) {
         final String extractedUsername = getUsernameFromToken(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }

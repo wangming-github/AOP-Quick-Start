@@ -7,10 +7,16 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/service-module/pom.xml" />
         <option value="$PROJECT_DIR$/log-module/pom.xml" />
+        <option value="$PROJECT_DIR$/authorization-module/pom.xml" />
+        <option value="$PROJECT_DIR$/A/pom.xml" />
+        <option value="$PROJECT_DIR$/A1/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/A/pom.xml" />
+        <option value="$PROJECT_DIR$/A1/pom.xml" />
+        <option value="$PROJECT_DIR$/B/pom.xml" />
         <option value="$PROJECT_DIR$/Log-demo/pom.xml" />
       </set>
     </option>
