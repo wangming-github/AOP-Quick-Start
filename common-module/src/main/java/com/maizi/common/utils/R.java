@@ -1,12 +1,4 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
-
-package org.maizi.common.utils;
+package com.maizi.common.utils;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +35,7 @@ public class R extends HashMap<String, Object> {
 
     public static R ok(String msg) {
         R r = new R();
+        r.put("code", 200);
         r.put("msg", msg);
         return r;
     }

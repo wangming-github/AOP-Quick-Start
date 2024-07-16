@@ -6,11 +6,11 @@
  * 版权所有，侵权必究！
  */
 
-package org.maizi.common.xss;
+package com.maizi.common.xss;
 
 
+import com.maizi.common.exception.RRException;
 import org.apache.commons.lang3.StringUtils;
-import org.maizi.common.exception.RRException;
 
 /**
  * SQL过滤

@@ -6,7 +6,7 @@
  * 版权所有，侵权必究！
  */
 
-package org.maizi.common.utils;
+package com.maizi.common.utils;
 
 
 import java.util.Optional;

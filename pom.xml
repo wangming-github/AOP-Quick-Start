@@ -2,21 +2,49 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>AOP-Quick-Start</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <groupId>com.maizi</groupId> <!-- 项目的 groupId，通常表示组织或公司名称，类似于 Java 包名 -->
+    <artifactId>AOP-Quick-Start</artifactId> <!-- 项目的 artifactId，表示项目的名称 -->
+    <version>1.0-SNAPSHOT</version> <!-- 项目的版本号，1.0-SNAPSHOT 表示这是一个开发中的版本 -->
+    <packaging>pom</packaging> <!-- 项目的打包类型，这里指定为 POM，表示这是一个父 POM 文件 -->
+
 
     <name>AOP-Quick-Start</name>
-    <url>http://maven.apache.org</url>
 
     <modules>
-        <module>authorization-module</module>
-        <module>log-module</module>
         <module>service-module</module>
+        <module>authorization-module</module>
+        <module>common-module</module>
     </modules>
 
+    <properties>
+        <java.version>1.8</java.version> <!-- 指定 Java 版本为 1.8 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- 指定构建时源文件的编码为 UTF-8 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> <!-- 指定报告输出的编码为 UTF-8 -->
+        <spring-boot.version>2.6.13</spring-boot.version>
+    </properties>
+
+
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -29,7 +57,85 @@
             <version>2.0.47</version>
         </dependency>
 
+        <!-- mybatisPlus 核心库 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.1</version>
+        </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies> <!-- 定义依赖管理的部分 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.28</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version> <!-- 使用最新的版本 -->
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Maven Compiler Plugin 用于编译项目的 Java 源代码 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <!-- 插件的 artifactId -->
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!-- 插件的版本号，这里使用 3.8.1 -->
+                <version>3.8.1</version>
+                <!-- 插件的配置 -->
+                <configuration>
+                    <!-- 指定 Java 源代码的版本，这里设置为 1.8 表示使用 Java 8 -->
+                    <source>1.8</source>
+                    <!-- 指定生成的字节码版本，这里设置为 1.8 表示生成 Java 8 兼容的字节码 -->
+                    <target>1.8</target>
+                    <!-- 指定源文件的字符编码，这里设置为 UTF-8 -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Spring Boot Maven Plugin 用于打包和管理 Spring Boot 应用程序 -->
+                <groupId>org.springframework.boot</groupId>
+                <!-- 插件的 artifactId -->
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 插件的版本号，使用 Maven 属性 spring-boot.version 来动态设置版本 -->
+                <version>${spring-boot.version}</version>
+                <!-- 插件的配置 -->
+                <configuration>
+                    <!-- 指定 Spring Boot 应用程序的主类（包含 main 方法的类） -->
+                    <mainClass>com.maizi.ServiceModuleApplication</mainClass>
+                    <!-- 设置为 true 表示跳过插件的默认执行 -->
+                    <skip>true</skip>
+                </configuration>
+                <!-- 定义插件的执行行为 -->
+                <executions>
+                    <execution>
+                        <!-- 为这个执行定义一个唯一的 ID -->
+                        <id>repackage</id>
+                        <!-- 定义要执行的目标 -->
+                        <goals>
+                            <!-- 目标是重新打包项目 -->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>

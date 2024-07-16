@@ -6,13 +6,13 @@
  * 版权所有，侵权必究！
  */
 
-package org.maizi.common.utils;
+package com.maizi.common.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
-import org.maizi.common.xss.SQLFilter;
+import com.maizi.common.xss.SQLFilter;
 
 import java.util.Map;
 

@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/authorization-module/pom.xml" />
         <option value="$PROJECT_DIR$/A/pom.xml" />
         <option value="$PROJECT_DIR$/A1/pom.xml" />
+        <option value="$PROJECT_DIR$/common-module/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -18,10 +19,11 @@
         <option value="$PROJECT_DIR$/A1/pom.xml" />
         <option value="$PROJECT_DIR$/B/pom.xml" />
         <option value="$PROJECT_DIR$/Log-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/log-module/pom.xml" />
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -1,17 +1,10 @@
-/**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
- * <p>
- * https://www.renren.io
- * <p>
- * 版权所有，侵权必究！
- */
+package com.maizi.common.exception;
 
-package org.maizi.common.exception;
-
-import org.maizi.common.utils.R;
+import com.maizi.common.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -49,9 +42,23 @@ public class RRExceptionHandler {
         return R.error("数据库中已存在该记录");
     }
 
-    @ExceptionHandler(Exception.class)
-    public R handleException(Exception e) {
-        logger.error(e.getMessage(), e);
-        return R.error();
+
+    // @ExceptionHandler(AuthenticationException.class)
+    // public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex) {
+    //     return new ResponseEntity<>(R.error(HttpStatus.UNAUTHORIZED.value(), "您需要登录才能访问该页面"), HttpStatus.UNAUTHORIZED);
+    // }
+    //
+    // @ExceptionHandler(AccessDeniedException.class)
+    // public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex) {
+    //     return new ResponseEntity<>(R.error(HttpStatus.FORBIDDEN.value(), "您没有权限访问该页面"), HttpStatus.FORBIDDEN);
+    // }
+
+    /**
+     * 全局异常处理
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public R handleException(RuntimeException e) {
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "服务器内部异常，请稍后重试!");
     }
+
 }

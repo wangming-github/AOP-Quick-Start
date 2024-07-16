@@ -1,4 +1,4 @@
-package com.maizi.servicemodule;
+package com.maizi.authorization;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
