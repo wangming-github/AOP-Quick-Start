@@ -20,7 +20,11 @@
         <java.version>1.8</java.version> <!-- 指定 Java 版本为 1.8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- 指定构建时源文件的编码为 UTF-8 -->
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> <!-- 指定报告输出的编码为 UTF-8 -->
+
+        <spring-cloud-openfeign.version>3.1.7</spring-cloud-openfeign.version>
         <spring-boot.version>2.6.13</spring-boot.version>
+        <spirng-cloud-version>2021.0.5</spirng-cloud-version>
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
     </properties>
 
 
@@ -56,17 +60,54 @@
             <artifactId>fastjson</artifactId>
             <version>2.0.47</version>
         </dependency>
-
-        <!-- mybatisPlus 核心库 -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.1</version>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
+        <!--通过此模块来规范boot和cloud的所有组件版本，所有的子工程将不需要考虑组件的版本问题-->
         <dependencies> <!-- 定义依赖管理的部分 -->
+            <!--这种写法和写在parent中作用一样，注意type和scope不可省略-->
+            <!--这种写法的优点是可以声明多个父级的项目包版本依赖，而parent只能由一个-->
+            <!--这是springboot相关包的版本管理-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--这是alibaba组件的版本管理-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--这是cloud的组件的版本管理，也可以使用spring-cloud-dependencies-parent，但是使用下面的更好-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spirng-cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+            <!-- mybatisPlus 核心库 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-openfeign.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

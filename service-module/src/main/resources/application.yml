@@ -1,2 +1,13 @@
 server:
   port: 8081
+
+spring:
+  application:
+    name: service-module
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5.5level %-40.40logger [%-4line] → %msg%n"

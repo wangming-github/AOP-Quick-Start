@@ -16,7 +16,7 @@
 │  │  │  │  │  maizi/
 │  │  │  │  │  ├─AuthorizationModuleApplication.java 应用程序的入口类，配置Mybatisplus的dao包扫描路径
 │  │  │  │  │  ├─
-│  │  │  │  │  │  authorizationmodule/
+│  │  │  │  │  │  author
 │  │  │  │  │  │  ├─
 │  │  │  │  │  │  │  config/
 │  │  │  │  │  │  │  ├─JwtAuthenticationTokenFilter.java 定义Jwt过滤器，当携带token的用户第二次登陆时进行校验
@@ -49,7 +49,7 @@
 │  │  │  │  │  │  │  ├─JwtUtil.java Jwt工具类
 │  │  │  │  │  │  │  ├─RedisServiceUtil.java 模拟Redis的工具
 │  │  │  │  │  ├─
-│  │  │  │  │  │  service/ 提供用户、角色、权限的增删改查
+│  │  │  │  │  │  serve/ 提供用户、角色、权限的增删改查
 │  │  test/
 │  │  ├─
 │  │  │  java/
@@ -61,6 +61,6 @@
 │  │  │  │  │  │  authorizationmodule/
 │  │  │  │  │  │  ├─AuthorizationModuleApplicationTests.java 
 │  │  │  │  │  │  ├─PasswordInit.java 对明文密码进行加密，然后更新到原数据上。
-├─
+│  │  │  │  │  │  ├─AllMatchExample.java 检查List中是否包含NULL元素
 
 ```

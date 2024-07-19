@@ -3,7 +3,6 @@ package com.maizi.common.exception;
 import com.maizi.common.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,7 +13,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  *
  * @author Mark sunlightcs@gmail.com
  */
-@RestControllerAdvice
+// @RestControllerAdvice
 public class RRExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -36,11 +35,11 @@ public class RRExceptionHandler {
         return R.error(404, "路径不存在，请检查路径是否正确");
     }
 
-    @ExceptionHandler(DuplicateKeyException.class)
-    public R handleDuplicateKeyException(DuplicateKeyException e) {
-        logger.error(e.getMessage(), e);
-        return R.error("数据库中已存在该记录");
-    }
+    // @ExceptionHandler(DuplicateKeyException.class)
+    // public R handleDuplicateKeyException(DuplicateKeyException e) {
+    //     logger.error(e.getMessage(), e);
+    //     return R.error("数据库中已存在该记录");
+    // }
 
 
     // @ExceptionHandler(AuthenticationException.class)
