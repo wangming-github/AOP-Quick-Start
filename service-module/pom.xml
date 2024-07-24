@@ -13,6 +13,14 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.maizi</groupId>
+            <artifactId>common-module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- 引入loadbalancer负载均衡，父工程引入了cloud的包管理，这里无需声明具体包-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -36,15 +44,6 @@
         <!--            <groupId>com.alibaba.cloud</groupId>-->
         <!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
         <!--        </dependency>-->
-
-
-        <dependency>
-            <groupId>com.maizi</groupId>
-            <artifactId>common-module</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
 
         <!-- spring-boot-starter-security-->
         <dependency>

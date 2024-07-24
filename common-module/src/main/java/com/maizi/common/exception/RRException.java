@@ -6,6 +6,8 @@ import lombok.Getter;
  * 自定义异常类，用于封装应用程序中发生的运行时异常。
  * 该类继承自 {@link RuntimeException}，并包含自定义的错误信息和错误码。
  * 提供多个构造方法用于创建带有不同信息和异常的对象。
+ *
+ * @author maizi
  */
 @Getter
 public class RRException extends RuntimeException {

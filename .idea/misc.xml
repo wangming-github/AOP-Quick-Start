@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/A/pom.xml" />
         <option value="$PROJECT_DIR$/A1/pom.xml" />
         <option value="$PROJECT_DIR$/common-module/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-library/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -19,6 +20,8 @@
         <option value="$PROJECT_DIR$/A1/pom.xml" />
         <option value="$PROJECT_DIR$/B/pom.xml" />
         <option value="$PROJECT_DIR$/Log-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-library/pom.xml" />
+        <option value="$PROJECT_DIR$/auth-module-springsecurity/pom.xml" />
         <option value="$PROJECT_DIR$/log-module/pom.xml" />
       </set>
     </option>

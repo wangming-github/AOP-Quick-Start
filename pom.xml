@@ -11,8 +11,8 @@
     <name>AOP-Quick-Start</name>
 
     <modules>
+        <module>auth-module</module>
         <module>service-module</module>
-        <module>authorization-module</module>
         <module>common-module</module>
     </modules>
 
