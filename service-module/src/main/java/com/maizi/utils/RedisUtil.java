@@ -37,7 +37,7 @@ public class RedisUtil {
             // 将对象序列化为 JSON 字符串
             String jsonValue = objectMapper.writeValueAsString(value);
             // 打印序列化后的字符串
-            log.info(ModuleType.SERVICE_MODULE +"数据序列化 JSON: " + jsonValue);
+            log.info(ModuleType.SERVICE_MODULE +" - 数据序列化 JSON: " + jsonValue);
             // 将序列化后的字符串存储到 Redis
             redisTemplate.opsForValue().set(key, jsonValue);
         } catch (Exception e) {
@@ -134,7 +134,7 @@ public class RedisUtil {
             return null;
         }
 
-        log.info(ModuleType.SERVICE_MODULE +"Redis中获取值:" + value);
+        log.info(ModuleType.SERVICE_MODULE +" - Redis中获取值:" + value);
         return convertValue(value, clazz);
     }
 
@@ -150,7 +150,7 @@ public class RedisUtil {
         try {
             return objectMapper.readValue(value.toString(), clazz);
         } catch (JsonProcessingException e) {
-            log.error("将 Redis 中存储的值{}转换为指定类型的对象{},失败了", value, clazz);
+            log.error(" - 将 Redis 中存储的值{}转换为指定类型的对象{},失败了", value, clazz);
             throw new RuntimeException("Failed to convert value to " + clazz.getSimpleName(), e);
         }
     }

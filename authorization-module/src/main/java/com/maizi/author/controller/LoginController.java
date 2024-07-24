@@ -1,5 +1,6 @@
 package com.maizi.author.controller;
 
+import com.maizi.author.service.AuthorService;
 import com.maizi.common.dto.UserDTO;
 import com.maizi.author.service.LoginService;
 import com.maizi.common.utils.R;
@@ -9,12 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-public class AuthController {
+public class LoginController {
 
 
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    AuthorService authorService;
 
     /**
      * 处理用户登录请求，并返回 JWT Token。

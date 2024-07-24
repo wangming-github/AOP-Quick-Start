@@ -1,4 +1,4 @@
-package com.maizi.common.exception;
+package com.maizi.exception;
 
 import com.maizi.common.constants.ModuleType;
 import com.maizi.common.utils.R;
@@ -19,29 +19,13 @@ import java.nio.file.AccessDeniedException;
  * @author maizi
  */
 @Slf4j
-// @RestControllerAdvice
-// @ControllerAdvice
-public class RRExceptionHandler {
+@ControllerAdvice
+public class Service_RRExceptionHandler {
 
-    /**
-     * 处理自定义异常 {@link RRException}。
-     *
-     * @param e 自定义异常对象
-     * @return 包含错误码和错误信息的响应对象
-     */
-    @ExceptionHandler(RRException.class)
-    public R handleRRException(RRException e) {
-        log.error(ModuleType.COMMON_MODULE + " - 自定义运行时异常: {}", e.getMessage());  // 记录异常信息
-        R r = new R();  // 创建响应对象
-        r.put("code", e.getCode());  // 设置错误码
-        r.put("msg", e.getMessage());  // 设置错误信息
-
-        return r;  // 返回响应对象
-    }
 
     @ExceptionHandler(AccessDeniedException.class)
     public void accessDeniedException(AccessDeniedException e) throws AccessDeniedException {
-        log.info("捕获到了AccessDeniedException======" + e.getMessage());
+        log.info("Service_捕获到了AccessDeniedException======" + e.getMessage());
         throw e;
     }
 
@@ -54,8 +38,7 @@ public class RRExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public R handleException(Exception e) {
-        log.info("======" + e.getMessage());
-        log.error(ModuleType.COMMON_MODULE + " - 未捕获的运行时异常: {}", e.getMessage());  // 记录异常信息
+        log.error("Service - 未捕获的运行时异常: {}", e.getMessage());  // 记录异常信息
         return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "系统异常！请稍后再试...");  // 返回内部服务器错误响应
     }
 }

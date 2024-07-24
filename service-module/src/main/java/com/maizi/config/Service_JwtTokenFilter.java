@@ -1,10 +1,11 @@
-package com.maizi.author.config;
+package com.maizi.config;
 
-import com.maizi.author.exception.Author_RRException;
-import com.maizi.author.module.CustomUserUserDetails;
-import com.maizi.author.utils.JwtUtil;
-import com.maizi.author.utils.RedisUtil;
 import com.maizi.common.constants.ModuleType;
+import com.maizi.exception.Service_RRException;
+import com.maizi.module.CustomUserUserDetails;
+import com.maizi.utils.JwtUtil;
+import com.maizi.common.exception.RRException;
+import com.maizi.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,7 +43,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
-public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
+public class Service_JwtTokenFilter extends OncePerRequestFilter {
 
 
     /**
@@ -88,14 +89,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         try {
             userName = jwtUtil.getUsernameFromToken(token);
         } catch (Exception e) {
-            throw new Author_RRException("token解析失败");  // 如果解析JWT失败，抛出自定义异常
+            throw new Service_RRException("token解析失败");  // 如果解析JWT失败，抛出自定义异常
         }
 
         // 从Redis中获取用户详细信息
         CustomUserUserDetails user = redisUtil.get(userName, CustomUserUserDetails.class);
         if (Objects.isNull(user)) {  // 如果Redis中没有找到用户信息，抛出自定义异常
             log.info(ModuleType.SERVICE_MODULE + " - [没有]在redis中找到用户名" + userName + "的缓存信息");
-            throw new Author_RRException("登录信息过期!");
+            throw new Service_RRException("登录信息过期!");
         }
         log.info(ModuleType.SERVICE_MODULE + " - 请求携带的token,解析出用户名【{}】，其缓存信息:{}", user.getUsername(), user.getAuthorities());
 

@@ -2,9 +2,15 @@ package com.maizi.serve.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.maizi.common.dto.UserDetailsDTO;
-import com.maizi.serve.entity.UsersEntity;
+import com.maizi.serve.dao.UsersDao;
+import com.maizi.serve.entity.*;
 import com.maizi.serve.utils.PageUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +26,7 @@ public interface UsersService extends IService<UsersEntity> {
 
     UserDetailsDTO findAuthorByUsername(String username);
 
-    // // 示例：对已有密码进行重新编码
-    // void reEncodePasswords();
+
 }
+
 

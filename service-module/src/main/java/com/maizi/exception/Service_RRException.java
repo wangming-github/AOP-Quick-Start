@@ -1,4 +1,4 @@
-package com.maizi.common.exception;
+package com.maizi.exception;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ import lombok.Getter;
  * 提供多个构造方法用于创建带有不同信息和异常的对象。
  */
 @Getter
-public class RRException extends RuntimeException {
+public class Service_RRException extends RuntimeException {
     private static final long serialVersionUID = 1L;  // 序列化ID，用于对象序列化和反序列化
 
     /**
@@ -27,22 +27,22 @@ public class RRException extends RuntimeException {
     private int code = 500;  // 错误码，默认值为500
 
     /**
-     * 使用指定的错误信息创建一个新的 {@code RRException} 实例。
+     * 使用指定的错误信息创建一个新的 {@code Service_RRException} 实例。
      *
      * @param msg 错误信息
      */
-    public RRException(String msg) {
+    public Service_RRException(String msg) {
         super(msg);  // 调用父类的构造方法
         this.msg = msg;  // 设置错误信息
     }
 
     /**
-     * 使用指定的错误信息和根本原因创建一个新的 {@code RRException} 实例。
+     * 使用指定的错误信息和根本原因创建一个新的 {@code Service_RRException} 实例。
      *
      * @param msg 错误信息
      * @param e   根本原因
      */
-    public RRException(String msg, Throwable e) {
+    public Service_RRException(String msg, Throwable e) {
         super(msg, e);  // 调用父类的构造方法，传递错误信息和根本原因
         this.msg = msg;  // 设置错误信息
     }
@@ -53,7 +53,7 @@ public class RRException extends RuntimeException {
      * @param msg  错误信息
      * @param code 错误码
      */
-    public RRException(String msg, int code) {
+    public Service_RRException(String msg, int code) {
         super(msg);  // 调用父类的构造方法
         this.msg = msg;  // 设置错误信息
         this.code = code;  // 设置错误码
@@ -66,7 +66,7 @@ public class RRException extends RuntimeException {
      * @param code 错误码
      * @param e    根本原因
      */
-    public RRException(String msg, int code, Throwable e) {
+    public Service_RRException(String msg, int code, Throwable e) {
         super(msg, e);  // 调用父类的构造方法，传递错误信息和根本原因
         this.msg = msg;  // 设置错误信息
         this.code = code;  // 设置错误码

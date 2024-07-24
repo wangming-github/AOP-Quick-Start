@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated(); // 其他所有请求必须经过认证
 
         http.logout().disable(); // 禁用默认注销接口，避免 Spring Security 修改 /logout 行为
-
+        http.formLogin().disable();// 禁用 Spring Security 默认的表单登录功能。
         // 将自定义 JWT 认证过滤器添加到 UsernamePasswordAuthenticationFilter 之前
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 

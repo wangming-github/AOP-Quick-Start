@@ -13,7 +13,17 @@
 
 
     <dependencies>
+        <!-- 引入loadbalancer负载均衡，父工程引入了cloud的包管理，这里无需声明具体包-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
         <!--服务注册/发现-->
         <dependency>

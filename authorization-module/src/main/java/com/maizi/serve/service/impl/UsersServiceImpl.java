@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.maizi.common.dto.UserDetailsDTO;
-import com.maizi.common.exception.RRException;
+import com.maizi.author.exception.Author_RRException;
 import com.maizi.serve.dao.UsersDao;
 import com.maizi.serve.entity.RolesEntity;
 import com.maizi.serve.entity.UsersEntity;
@@ -17,6 +17,7 @@ import com.maizi.serve.service.RolePermissionsService;
 import com.maizi.serve.service.RolesService;
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,10 +27,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+@Slf4j
 @Service("usersService")
 public class UsersServiceImpl extends ServiceImpl<UsersDao, UsersEntity> implements UsersService {
 
 
+    @Autowired
+    UsersDao usersDao;
     @Autowired
     RolesService rolesService;
     @Autowired
@@ -38,10 +42,10 @@ public class UsersServiceImpl extends ServiceImpl<UsersDao, UsersEntity> impleme
     PermissionsService permissionsService;
 
     @Override
-    public UserDetailsDTO findAuthorByUsername(String username) {
+    public UserDetailsDTO findAuthorByUsername(String username) throws Author_RRException {
 
-        // 查询当前用户信息
-        UsersEntity user = Optional.ofNullable(getUserByName(username)).orElseThrow(() -> new RRException("没有找到用户名为{}的信息！ " + username));
+        // 查询当前用户信息， 如果用户未找到，则抛出异常。
+        UsersEntity user = Optional.ofNullable(getUserByName(username)).orElseThrow(() -> new Author_RRException("没有找到用户名为" + username + "的信息！ "));
 
         // 查询角色信息
         List<RolesEntity> roles = rolesService.findRolesByUserId(user.getId());

@@ -42,7 +42,6 @@ public class CustomUserUserDetails implements UserDetails {
     // 数据库查询出来的用户
     private UserDetailsDTO user;
 
-
     // 存储SpringSecurity所需要的权限信息的集合
     @JsonIgnore  // 序列化时，redis存储数据时忽略该字段
     private List<GrantedAuthority> authorities;
@@ -55,7 +54,7 @@ public class CustomUserUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // 只需要第一次进来时将permission 转换为authoritys
         if (authorities == null) {
-            log.info(ModuleType.AUTHORIZATION_MODULE + "权限信息集合为空通过UserDetailsDTO初始化....");
+            log.info(ModuleType.AUTHORIZATION_MODULE + " - 权限信息集合为空通过UserDetailsDTO初始化....");
             mapRolesToAuthorities(user.getRolesNames(), user.getPermissionNames());
         }
         return authorities;
@@ -74,7 +73,7 @@ public class CustomUserUserDetails implements UserDetails {
             permissions.forEach(permission -> authorities.add(new SimpleGrantedAuthority(permission)));
         }
         // 将权限添加到权限列表中
-        log.info(ModuleType.AUTHORIZATION_MODULE + "↘↘authority：" + this.authorities);
+        log.info(ModuleType.AUTHORIZATION_MODULE + " - ↘↘authority：" + this.authorities);
     }
 
 

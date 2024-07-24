@@ -3,6 +3,7 @@ package com.maizi.serve.controller;
 import com.maizi.common.dto.UserDTO;
 import com.maizi.common.dto.UserDetailsDTO;
 import com.maizi.common.utils.R;
+import com.maizi.serve.entity.UserWithRolesAndPermissions;
 import com.maizi.serve.entity.UsersEntity;
 import com.maizi.serve.utils.PageUtils;
 import com.maizi.serve.service.UsersService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 

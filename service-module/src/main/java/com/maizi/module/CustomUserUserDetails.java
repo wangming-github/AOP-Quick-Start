@@ -36,8 +36,8 @@ public class CustomUserUserDetails implements UserDetails {
     // 构造方法
     public CustomUserUserDetails(UserDetailsDTO user) {
         this.user = user;
-        log.info(ModuleType.SERVICE_MODULE +"↘↘角色：" + user.getRolesNames());
-        log.info(ModuleType.SERVICE_MODULE +"↘↘权限：" + user.getPermissionNames());
+        log.info(ModuleType.SERVICE_MODULE + " - ↘↘角色：" + user.getRolesNames());
+        log.info(ModuleType.SERVICE_MODULE + " - ↘↘权限：" + user.getPermissionNames());
     }
 
     // 系统所需的权限集合List<GrantedAuthority>
@@ -65,7 +65,7 @@ public class CustomUserUserDetails implements UserDetails {
         roles.forEach(role -> authority.add(new SimpleGrantedAuthority("ROLE_" + role)));
         // 将权限添加到权限列表中
         permissions.forEach(permission -> authority.add(new SimpleGrantedAuthority(permission)));
-        log.info(ModuleType.SERVICE_MODULE +"↘↘authority：" + this.authority);
+        log.info(ModuleType.SERVICE_MODULE + " - ↘↘authority：" + this.authority);
     }
 
 

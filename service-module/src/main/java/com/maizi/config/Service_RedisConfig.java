@@ -30,7 +30,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author maizi
  */
 @Configuration
-public class RedisConfig {
+public class Service_RedisConfig {
 
     /**
      * 配置 RedisTemplate 实例

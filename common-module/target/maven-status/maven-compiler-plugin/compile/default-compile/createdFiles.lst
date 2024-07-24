@@ -8,3 +8,4 @@ com/maizi/common/dto/UserDTO.class
 com/maizi/common/utils/Constant.class
 com/maizi/common/exception/RRExceptionHandler.class
 com/maizi/common/App.class
+com/maizi/common/constants/ModuleType.class

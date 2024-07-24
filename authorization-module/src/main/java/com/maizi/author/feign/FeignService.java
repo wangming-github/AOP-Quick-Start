@@ -1,6 +1,8 @@
 package com.maizi.author.feign;
 
+import com.maizi.author.feign.config.FeignConfig;
 import com.maizi.author.module.CustomUserUserDetails;
+import com.maizi.common.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author maizi
  */
 @FeignClient(name = "service-module", configuration = FeignConfig.class)
-public interface ServiceFeignClient {
+public interface FeignService {
 
     /*
      * ----1.将【SpuBoundsTo】对象通过【@RequestBody】注解转为Json
@@ -22,20 +24,42 @@ public interface ServiceFeignClient {
      *
      */
 
+
+    /**
+     * admin角色才有可能会访问成功
+     */
     @GetMapping("/admin/greet/{name}")
-    String greet(@PathVariable("name") String name);
+    R greet(@PathVariable("name") String name);
 
     @PostMapping("/admin/echo")
-    String echo(@RequestBody String message);
+    R echo(@RequestBody String message);
 
     @GetMapping("/admin/sum/{a}/{b}")
-    String sum(@PathVariable("a") int a, @PathVariable("b") int b);
+    R sum(@PathVariable("a") int a, @PathVariable("b") int b);
 
     @GetMapping("/admin/multiply/{a}/{b}")
-    String multiply(@PathVariable("a") int a, @PathVariable("b") int b);
+    R multiply(@PathVariable("a") int a, @PathVariable("b") int b);
 
     @PostMapping("/admin/userDetails")
     boolean saveCustomUserUserDetails(@RequestBody CustomUserUserDetails userDetails);
+
+    /**
+     * user角色才有可能会访问成功
+     */
+    @GetMapping("/user/greet/{name}")
+    R greetuser(@PathVariable("name") String name);
+
+    @PostMapping("/user/echo")
+    R echouser(@RequestBody String message);
+
+    @GetMapping("/user/sum/{a}/{b}")
+    R sumuser(@PathVariable("a") int a, @PathVariable("b") int b);
+
+    @GetMapping("/user/multiply/{a}/{b}")
+    R multiplyuser(@PathVariable("a") int a, @PathVariable("b") int b);
+
+    @PostMapping("/user/userDetails")
+    boolean saveCustomUserUserDetailsuser(@RequestBody CustomUserUserDetails userDetails);
 
 
 }
